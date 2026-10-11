@@ -57,5 +57,5 @@ jobs:
         name: TWRP_Boot_Infinix_X6515
         path: |
           twrp/out/target/product/*/*.img
-          twrp/out/target/product/*/*.img
+          twrp/out/target/product/*/*.elf
           
