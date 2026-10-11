@@ -56,6 +56,6 @@ jobs:
       with:
         name: TWRP_Boot_Infinix_X6515
         path: |
-          twrp/out/target/product/X6515/boot.img
-          twrp/out/target/product/X6515/recovery.img
+          twrp/out/target/product/*/*.img
+          twrp/out/target/product/*/*.img
           
