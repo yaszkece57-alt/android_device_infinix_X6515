@@ -1,0 +1,23 @@
+name: Build TWRP Infinix X6515
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Checkout Device Tree
+      uses: actions/checkout@v3
+
+    - name: Setup Environment
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y git wget curl python3
+
+    - name: Ready to Build
+      run: |
+        echo "Device tree Infinix X6515 berhasil dibaca!"
+        echo "Sistem siap memproses pembuatan file recovery.img."
+        
