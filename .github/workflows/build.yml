@@ -11,7 +11,7 @@ jobs:
     - name: Checkout Device Tree
       uses: actions/checkout@v4
       with:
-        path: device/infinix/X6515
+        path: device_tree
 
     - name: Free Disk Space
       run: |
@@ -44,13 +44,14 @@ jobs:
     - name: Build Recovery Image
       run: |
         cd twrp
-        mv ../device device/
+        mkdir -p device/infinix/Infinix-X6515
+        cp -r ../device_tree/* device/infinix/Infinix-X6515/
         source build/envsetup.sh
-        lunch omni_Infinix-X6515-eng || lunch twrp_Infinix-X6515-eng
+        lunch omni_Infinix-X6515-eng || lunch omni_Infinix-X6515-userdebug
         mka recoveryimage -j$(nproc --all)
 
     - name: Upload Recovery Artifact
       uses: actions/upload-artifact@v4
       with:
         name: TWRP_Infinix_X6515
-        path: twrp/out/target/product/X6515/recovery.img
+        path: twrp/out/target/product/Infinix-X6515/recovery.img
