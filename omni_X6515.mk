@@ -1,8 +1,8 @@
 # Inherit from those products. Most specifics first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# Inherit from omni device
-$(call inherit-product, vendor/omni/config/common.mk)
+# Inherit from TWRP configuration
+$(call inherit-product, vendor/twrp/config/common.mk)
 
 # Inherit from our device
 $(call inherit-product-if-exists, device/infinix/X6515/device.mk)
