@@ -9,12 +9,16 @@ jobs:
 
     steps:
     - name: Checkout Device Tree
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         path: device/infinix/X6515
 
-    - name: Cleanup Disk Space
-      uses: rokibhasansagar/slim_disk_space@main
+    - name: Free Disk Space
+      run: |
+        sudo rm -rf /usr/share/dotnet
+        sudo rm -rf /usr/local/lib/android
+        sudo rm -rf /opt/ghc
+        sudo rm -rf "/usr/local/share/boost"
 
     - name: Set up Environment
       run: |
@@ -46,7 +50,7 @@ jobs:
         mka recoveryimage -j$(nproc --all)
 
     - name: Upload Recovery Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: TWRP_Infinix_X6515
         path: twrp/out/target/product/X6515/recovery.img
