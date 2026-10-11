@@ -11,7 +11,7 @@ jobs:
     - name: Checkout Device Tree
       uses: actions/checkout@v4
       with:
-        path: device/infinix/Infinix-X6515
+        path: device_tree
 
     - name: Free Disk Space
       run: |
@@ -44,7 +44,8 @@ jobs:
     - name: Build Recovery Boot Image
       run: |
         cd twrp
-        cp -r ../device/infinix/Infinix-X6515 device/infinix/Infinix-X6515
+        mkdir -p device/infinix/Infinix-X6515
+        cp -r ../device_tree/* device/infinix/Infinix-X6515/
         export ALLOW_MISSING_DEPENDENCIES=true
         source build/envsetup.sh
         lunch omni_Infinix-X6515-eng
@@ -56,6 +57,5 @@ jobs:
         name: TWRP_Boot_Infinix_X6515
         path: |
           twrp/out/target/product/Infinix-X6515/boot.img
-          twrp/out/target/product/Infinix-X6515/vendor_boot.img
           twrp/out/target/product/Infinix-X6515/recovery.img
           
