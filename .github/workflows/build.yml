@@ -44,11 +44,11 @@ jobs:
     - name: Build Recovery Boot Image
       run: |
         cd twrp
-        mkdir -p device/infinix/Infinix-X6515
-        cp -r ../device_tree/* device/infinix/Infinix-X6515/
+        mkdir -p device/infinix/X6515
+        cp -r ../device_tree/* device/infinix/X6515/
         export ALLOW_MISSING_DEPENDENCIES=true
         source build/envsetup.sh
-        lunch omni_Infinix-X6515-eng
+        lunch omni_X6515-eng
         mka bootimage -j$(nproc --all) || mka recoveryimage -j$(nproc --all)
 
     - name: Upload TWRP Boot Artifact
@@ -56,6 +56,6 @@ jobs:
       with:
         name: TWRP_Boot_Infinix_X6515
         path: |
-          twrp/out/target/product/Infinix-X6515/boot.img
-          twrp/out/target/product/Infinix-X6515/recovery.img
+          twrp/out/target/product/X6515/boot.img
+          twrp/out/target/product/X6515/recovery.img
           
