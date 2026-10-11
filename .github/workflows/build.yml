@@ -46,12 +46,13 @@ jobs:
         cd twrp
         mkdir -p device/infinix/Infinix-X6515
         cp -r ../device_tree/* device/infinix/Infinix-X6515/
+        export ALLOW_MISSING_DEPENDENCIES=true
         source build/envsetup.sh
-        lunch omni_Infinix-X6515-eng || lunch omni_Infinix-X6515-userdebug
+        lunch omni_Infinix-X6515-eng || lunch twrp_Infinix-X6515-eng || lunch omni_Infinix-X6515-userdebug
         mka recoveryimage -j$(nproc --all)
 
     - name: Upload Recovery Artifact
       uses: actions/upload-artifact@v4
       with:
         name: TWRP_Infinix_X6515
-        path: twrp/out/target/product/Infinix-X6515/recovery.img
+        path: twrp/out/target/product/*/recovery.img
