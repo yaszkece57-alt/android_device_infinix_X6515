@@ -11,7 +11,7 @@ jobs:
     - name: Checkout Device Tree
       uses: actions/checkout@v4
       with:
-        path: device_tree
+        path: device/infinix/Infinix-X6515
 
     - name: Free Disk Space
       run: |
@@ -41,19 +41,21 @@ jobs:
         repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-12.1
         repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
 
-    - name: Build Recovery Image
+    - name: Build Recovery Boot Image
       run: |
         cd twrp
-        mkdir -p device/infinix/Infinix-X6515
-        cp -r ../device_tree/* device/infinix/Infinix-X6515/
+        cp -r ../device/infinix/Infinix-X6515 device/infinix/Infinix-X6515
         export ALLOW_MISSING_DEPENDENCIES=true
         source build/envsetup.sh
         lunch omni_Infinix-X6515-eng
-        mka recoveryimage -j$(nproc --all)
+        mka bootimage -j$(nproc --all) || mka recoveryimage -j$(nproc --all)
 
-    - name: Upload Recovery Artifact
+    - name: Upload TWRP Boot Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: TWRP_Infinix_X6515
-        path: twrp/out/target/product/Infinix-X6515/recovery.img
-        
+        name: TWRP_Boot_Infinix_X6515
+        path: |
+          twrp/out/target/product/Infinix-X6515/boot.img
+          twrp/out/target/product/Infinix-X6515/vendor_boot.img
+          twrp/out/target/product/Infinix-X6515/recovery.img
+          
