@@ -45,7 +45,7 @@ jobs:
       run: |
         cd twrp
         mkdir -p device/infinix/X6515
-        cp -r ../device_tree/* device/infinix/X6515/
+        cp -r ../device_tree/. device/infinix/X6515/
         export ALLOW_MISSING_DEPENDENCIES=true
         source build/envsetup.sh
         lunch omni_X6515-eng
