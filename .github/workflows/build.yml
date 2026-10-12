@@ -51,13 +51,10 @@ jobs:
         lunch omni_X6515-eng
         mka bootimage -j$(nproc --all) || mka recoveryimage -j$(nproc --all)
 
-    - name: Find output files
-      run: |
-        find twrp/out/target/product/ -name "*.img"
-
-    - name: Debug Find All Images
-      run: |
-        find . -name "*.img"
+    - name: Upload TWRP Boot Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: TWRP_Boot_Infinix_X6515
+        path: twrp/out/target/product/**/*.img
         
-
           
